@@ -433,3 +433,10 @@ footer p:last-child {
     max-width: 200px;
   }
 }
+.catalog-grid {
+  display: grid !important;
+  overflow-x: visible !important;
+  max-width: 100% !important;
+  margin-top: 20px;
+}
+
