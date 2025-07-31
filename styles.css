@@ -429,7 +429,7 @@ footer p:last-child {
   }
 
   .tendencia-carousel .fabric-card {
-    flex: 0 0 200px;
-    max-width: 200px;
+    flex: 0 0 80px;
+    max-width: 280px;
   }
 }
