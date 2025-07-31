@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function enviarConsulta(element) {
   const nombreTela = element.getAttribute('data-name') || 'tela';
   const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
-  const numero = "541565903806";
+  const numero = "1566182006";
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, '_blank');
 }
