@@ -433,5 +433,24 @@ footer p:last-child {
     max-width: 200px;
   }
 }
+@media (min-width: 768px) {
+  .tendencia-carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    overflow-x: visible;
+    padding-bottom: 0;
+    max-width: 720px;
+    margin: 0 auto;
+    scroll-snap-type: none;
+  }
+
+  .tendencia-carousel .fabric-card {
+    flex: none;
+    max-width: none;
+    width: 100%;
+    scroll-snap-align: none;
+  }
+}
 
 
