@@ -159,10 +159,10 @@ h1 {
   color: #e74c3c;
   margin-bottom: 10px;
 }
-/*45deg, #667eea, #764ba2*/
+
 /* Botón consultar */
 .contact-btn {
-  background: linear-gradient(45deg, #D67D43, #B75A2B); 
+  background: linear-gradient(45deg, #667eea, #764ba2); 
   color: white;
   padding: 7px 14px;
   border: none;
@@ -174,15 +174,11 @@ h1 {
   display: inline-block;
   font-size: 0.85rem;
 }
-/*.contact-btn:hover {
+.contact-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
-*/
-.contact-btn:hover {
-  box-shadow: 0 6px 20px rgba(183, 90, 43, 0.6);
-  transform: scale(1.05);
-}
+
 
 /* Footer siempre abajo */
 footer {
