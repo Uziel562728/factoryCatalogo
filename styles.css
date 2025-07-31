@@ -1,0 +1,435 @@
+/* Reset y base */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+}
+
+/* Contenedor principal que crece */
+.container {
+  flex: 1 0 auto;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 15px;
+}
+
+/* Botón WhatsApp */
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(45deg, #25d366, #128c7e);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  margin-top: 15px;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Grid de las tarjetas */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Tarjetas */
+.fabric-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 220px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.fabric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Slider de imágenes */
+.fabric-slider {
+  position: relative;
+  width: 100%;
+  padding-top: 140%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.slider-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.slider-img.active {
+  opacity: 1;
+}
+
+.fabric-label {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+  z-index: 2;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+/* Texto de la tarjeta */
+.fabric-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.fabric-description {
+  color: #7f8c8d;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  font-size: 0.85rem;
+}
+
+.fabric-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+/* Botón consultar */
+.contact-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.85rem;
+}
+
+.contact-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Footer siempre abajo */
+footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  text-align: center;
+  padding: 30px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+}
+
+footer p:last-child {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 tarjetas por fila en celular */
+    gap: 10px;
+  }
+
+  .fabric-card {
+    max-width: 100%;
+  }
+
+  header {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Extra: para pantallas muy angostas (opcional) */
+@media (max-width: 360px) {
+  .catalog-grid {
+    grid-template-columns: 1fr; /* 1 tarjeta por fila si es muy angosta */
+  }
+}
+
+/* Divider */
+.divider {
+  border: none;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 25px 0;
+  border-radius: 2px;
+}
+
+/* Modal de imágenes */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.8);
+  user-select: none;
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 70vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.modal-caption {
+  margin: 15px auto 30px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.modal .prev,
+.modal .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 12px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 2.5rem;
+  border-radius: 3px;
+  user-select: none;
+  background-color: rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+.modal .prev:hover,
+.modal .next:hover {
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal .prev {
+  left: 10px;
+}
+
+.modal .next {
+  right: 10px;
+}
+
+.modal .close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.modal .close:hover {
+  color: #ccc;
+}
+
+#imageModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+/* --- NUEVO: Carrusel Tendencias / Stock Verano --- */
+.tendencia-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
+}
+
+.tendencia-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tendencia-carousel::-webkit-scrollbar-thumb {
+  background: #764ba2;
+  border-radius: 3px;
+}
+
+.tendencia-carousel::-webkit-scrollbar-track {
+  background: rgba(118, 75, 162, 0.2);
+  border-radius: 3px;
+}
+
+/* Ajustar ancho de las tarjetas dentro del carrusel */
+.tendencia-carousel .fabric-card {
+  flex: 0 0 160px;
+  max-width: 160px;
+  cursor: default;
+}
+
+/* Reducir tamaño de texto en carrusel para mejor ajuste */
+.tendencia-carousel .fabric-name {
+  font-size: 1rem;
+}
+
+.tendencia-carousel .fabric-description {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  min-height: 40px; /* para alinear mejor altura */
+}
+@media (min-width: 768px) {
+  .tendencia-carousel {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-x: hidden;
+    gap: 20px;
+    padding-bottom: 0;
+  }
+
+  .tendencia-carousel .fabric-card {
+    flex: 0 0 200px;
+    max-width: 200px;
+  }
+}
+/* Carrusel horizontal solo para móviles */
+
+.tendencia-carousel {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.tendencia-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+.tendencia-carousel::-webkit-scrollbar-thumb {
+  background: #764ba2;
+  border-radius: 3px;
+}
+.tendencia-carousel::-webkit-scrollbar-track {
+  background: rgba(118, 75, 162, 0.2);
+  border-radius: 3px;
+}
+
+.tendencia-carousel .fabric-card {
+  flex: 0 0 auto;
+  width: 75%;
+  max-width: 220px;
+  scroll-snap-align: start;
+}
+
+/* En pantallas grandes, vuelve a diseño tipo grid/fila */
+@media (min-width: 768px) {
+  .tendencia-carousel {
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-x: hidden;
+    gap: 20px;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+
+  .tendencia-carousel .fabric-card {
+    flex: 0 0 200px;
+    max-width: 200px;
+  }
+}
