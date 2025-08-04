@@ -9,6 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.opacity = '1';
       card.style.transform = 'translateY(0)';
     }, index * 200);
+    // Filtrar telas del catálogo según texto del buscador
+const searchInput = document.getElementById('fabricSearch');
+if (searchInput) {
+  searchInput.addEventListener('input', () => {
+    const filter = searchInput.value.toLowerCase();
+    const cards = document.querySelectorAll('.fabric-card');
+
+    cards.forEach(card => {
+      const name = card.querySelector('.fabric-name').textContent.toLowerCase();
+      const description = card.querySelector('.fabric-description').textContent.toLowerCase();
+      
+      if (name.includes(filter) || description.includes(filter)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+}
+
   });
 
   // Slider automático para cada .fabric-slider
@@ -25,54 +45,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   });
 
-  // Auto scroll horizontal para .tendencia-carousel en móviles
-  const carousel = document.querySelector('.tendencia-carousel');
-  if (carousel) {
-    let scrollAmount = 0;
-    const scrollStep = 1; // píxeles que avanza cada vez
-    const delay = 15;     // ms entre cada paso (velocidad)
-
-    function autoScroll() {
-      scrollAmount += scrollStep;
-      if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
-        scrollAmount = 0; // vuelve al inicio
-      }
-      carousel.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
+ // --- NUEVO: Código para el carrusel personalizado ---
+  
+  // Productos para el carrusel con su info
+  const productos = [
+    {
+      nombre: "Spandex Glitter",
+      descripcion: "Rinde 3 mts, elastizada y con brillo sutil que realza cualquier diseño. Ideal para confección de ropa de noche, danza o trajes llamativos. Comodidad, elasticidad y estilo en una sola tela."
+    },
+    {
+      nombre: "Sastrero Guinea",
+      descripcion: "Tela duradera y de alta calidad, perfecta para confección de prendas formales y de trabajo. Su textura resistente y acabado mate garantizan elegancia y resistencia en cada costura."
+    },
+    {
+      nombre: "Tejido Boho",
+      descripcion: "Tela de alta calidad con textura suave y acabado impecable. Presenta colores y patrones cuidadosamente elaborados que ofrecen versatilidad y durabilidad."
     }
+  ];
 
-    let autoScrollInterval = setInterval(autoScroll, delay);
+  // Variables para el carrusel
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.carousel img');
+  const indicators = document.querySelectorAll('.indicator');
+  const totalSlides = slides.length;
 
-    // Pausar auto scroll si el usuario interactúa (mouse o touch)
-    let isUserInteracting = false;
+  function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      indicators.forEach(indicator => indicator.classList.remove('active'));
 
-    carousel.addEventListener('mouseenter', () => {
-      clearInterval(autoScrollInterval);
-    });
-    carousel.addEventListener('mouseleave', () => {
-      autoScrollInterval = setInterval(autoScroll, delay);
-    });
+      if (index >= totalSlides) currentSlideIndex = 0;
+      else if (index < 0) currentSlideIndex = totalSlides - 1;
+      else currentSlideIndex = index;
 
-    carousel.addEventListener('touchstart', () => {
-      clearInterval(autoScrollInterval);
-      isUserInteracting = true;
-    });
-    carousel.addEventListener('touchend', () => {
-      if (isUserInteracting) {
-        autoScrollInterval = setInterval(autoScroll, delay);
-        isUserInteracting = false;
+      slides[currentSlideIndex].classList.add('active');
+      indicators[currentSlideIndex].classList.add('active');
+
+      // Actualizar texto y botón del producto
+      const nameEl = document.getElementById('product-name');
+      const descEl = document.getElementById('product-description');
+      const btn = document.querySelector('.product-info .contact-btn');
+
+      if(nameEl && descEl && btn) {
+        nameEl.textContent = productos[currentSlideIndex].nombre;
+        descEl.textContent = productos[currentSlideIndex].descripcion;
+
+        // Actualizar onclick del botón para enviar consulta con nombre correcto
+        btn.onclick = () => enviarConsultaConNombre(productos[currentSlideIndex].nombre);
       }
-    });
   }
+
+  function nextSlide() {
+      showSlide(currentSlideIndex + 1);
+  }
+
+  function prevSlide() {
+      showSlide(currentSlideIndex - 1);
+  }
+
+  function currentSlide(index) {
+      showSlide(index - 1);
+  }
+window.nextSlide = nextSlide;
+window.prevSlide = prevSlide;
+window.currentSlide = currentSlide;
+
+  function startCarousel() {
+      setInterval(nextSlide, 4000);
+  }
+
+  // Función para abrir WhatsApp con mensaje personalizado (nuevo)
+  function enviarConsultaConNombre(nombreTela) {
+    const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
+    const numero = "541565903806";
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+  }
+
+  // Inicializar carrusel al cargar DOM
+  if(slides.length > 0) {
+    showSlide(0);
+    startCarousel();
+  }
+
+  // --- FIN NUEVO ---
 });
 
 // WhatsApp consulta con mensaje personalizado
 function enviarConsulta(element) {
   const nombreTela = element.getAttribute('data-name') || 'tela';
   const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
-  const numero = "1566182006";
+  const numero = "541565903806";
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, '_blank');
 }
