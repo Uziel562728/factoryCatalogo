@@ -9,27 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.opacity = '1';
       card.style.transform = 'translateY(0)';
     }, index * 200);
-    // Filtrar telas del catálogo según texto del buscador
-const searchInput = document.getElementById('fabricSearch');
-if (searchInput) {
-  searchInput.addEventListener('input', () => {
-    const filter = searchInput.value.toLowerCase();
-    const cards = document.querySelectorAll('.fabric-card');
+  });
 
-    cards.forEach(card => {
-      const name = card.querySelector('.fabric-name').textContent.toLowerCase();
-      const description = card.querySelector('.fabric-description').textContent.toLowerCase();
-      
-      if (name.includes(filter) || description.includes(filter)) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
+  // Filtrar telas del catálogo según texto del buscador
+  const searchInput = document.getElementById('fabricSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+      const cards = document.querySelectorAll('.fabric-card');
+
+      cards.forEach(card => {
+        const name = card.querySelector('.fabric-name').textContent.toLowerCase();
+        const description = card.querySelector('.fabric-description').textContent.toLowerCase();
+
+        if (name.includes(filter) || description.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     });
-  });
-}
-
-  });
+  }
 
   // Slider automático para cada .fabric-slider
   const sliders = document.querySelectorAll('.fabric-slider');
@@ -45,23 +45,23 @@ if (searchInput) {
     }, 3000);
   });
 
- // --- NUEVO: Código para el carrusel personalizado ---
-  
+  // --- NUEVO: Código para el carrusel personalizado ---
   // Productos para el carrusel con su info
-  const productos = [
-    {
-      nombre: "Spandex Glitter",
-      descripcion: "Rinde 3 mts, elastizada y con brillo sutil que realza cualquier diseño. Ideal para confección de ropa de noche, danza o trajes llamativos. Comodidad, elasticidad y estilo en una sola tela."
-    },
-    {
-      nombre: "Sastrero Guinea",
-      descripcion: "Tela duradera y de alta calidad, perfecta para confección de prendas formales y de trabajo. Su textura resistente y acabado mate garantizan elegancia y resistencia en cada costura."
-    },
-    {
-      nombre: "Tejido Boho",
-      descripcion: "Tela de alta calidad con textura suave y acabado impecable. Presenta colores y patrones cuidadosamente elaborados que ofrecen versatilidad y durabilidad."
-    }
-  ];
+ const productos = [
+  {
+    nombre: "Lino Sastrero",
+    descripcion: "Elegante y fresco, el lino sastrero combina la naturalidad del lino con la estructura ideal para prendas formales de verano. Ideal para trajes livianos, blazers y pantalones con caída impecable."
+  },
+  {
+    nombre: "Morley Suede",
+    descripcion: "Tela con textura acanalada tipo morley y acabado tipo gamuza. Suave, elástica y elegante, ideal para prendas modernas, cómodas y con un toque sofisticado."
+  },
+  {
+    nombre: "Wafle",
+    descripcion: "Tela con textura acanalada en forma de cuadrícula, suave y confortable al tacto. Perfecta para prendas casuales, buzos, joggers y looks relajados con estilo."
+  }
+];
+
 
   // Variables para el carrusel
   let currentSlideIndex = 0;
@@ -70,63 +70,63 @@ if (searchInput) {
   const totalSlides = slides.length;
 
   function showSlide(index) {
-      slides.forEach(slide => slide.classList.remove('active'));
-      indicators.forEach(indicator => indicator.classList.remove('active'));
+    slides.forEach(slide => slide.classList.remove('active'));
+    indicators.forEach(indicator => indicator.classList.remove('active'));
 
-      if (index >= totalSlides) currentSlideIndex = 0;
-      else if (index < 0) currentSlideIndex = totalSlides - 1;
-      else currentSlideIndex = index;
+    if (index >= totalSlides) currentSlideIndex = 0;
+    else if (index < 0) currentSlideIndex = totalSlides - 1;
+    else currentSlideIndex = index;
 
-      slides[currentSlideIndex].classList.add('active');
-      indicators[currentSlideIndex].classList.add('active');
+    slides[currentSlideIndex].classList.add('active');
+    indicators[currentSlideIndex].classList.add('active');
 
-      // Actualizar texto y botón del producto
-      const nameEl = document.getElementById('product-name');
-      const descEl = document.getElementById('product-description');
-      const btn = document.querySelector('.product-info .contact-btn');
+    // Actualizar texto y botón del producto
+    const nameEl = document.getElementById('product-name');
+    const descEl = document.getElementById('product-description');
+    const btn = document.querySelector('.product-info .contact-btn');
 
-      if(nameEl && descEl && btn) {
-        nameEl.textContent = productos[currentSlideIndex].nombre;
-        descEl.textContent = productos[currentSlideIndex].descripcion;
+    if (nameEl && descEl && btn) {
+      nameEl.textContent = productos[currentSlideIndex].nombre;
+      descEl.textContent = productos[currentSlideIndex].descripcion;
 
-        // Actualizar onclick del botón para enviar consulta con nombre correcto
-        btn.onclick = () => enviarConsultaConNombre(productos[currentSlideIndex].nombre);
-      }
+      // Actualizar onclick del botón para enviar consulta con nombre correcto
+      btn.onclick = () => enviarConsultaConNombre(productos[currentSlideIndex].nombre);
+    }
   }
 
   function nextSlide() {
-      showSlide(currentSlideIndex + 1);
+    showSlide(currentSlideIndex + 1);
   }
 
   function prevSlide() {
-      showSlide(currentSlideIndex - 1);
+    showSlide(currentSlideIndex - 1);
   }
 
   function currentSlide(index) {
-      showSlide(index - 1);
+    showSlide(index - 1);
   }
-window.nextSlide = nextSlide;
-window.prevSlide = prevSlide;
-window.currentSlide = currentSlide;
+
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
+  window.currentSlide = currentSlide;
 
   function startCarousel() {
-      setInterval(nextSlide, 4000);
+    setInterval(nextSlide, 4000);
   }
 
   // Función para abrir WhatsApp con mensaje personalizado (nuevo)
   function enviarConsultaConNombre(nombreTela) {
     const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
-    const numero = "541565903806";
+    const numero = "5491166182006";
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
   }
 
   // Inicializar carrusel al cargar DOM
-  if(slides.length > 0) {
+  if (slides.length > 0) {
     showSlide(0);
     startCarousel();
   }
-
   // --- FIN NUEVO ---
 });
 
@@ -134,7 +134,7 @@ window.currentSlide = currentSlide;
 function enviarConsulta(element) {
   const nombreTela = element.getAttribute('data-name') || 'tela';
   const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
-  const numero = "541565903806";
+  const numero = "5491166182006";
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, '_blank');
 }
@@ -154,7 +154,7 @@ function openModal(sliderDiv) {
   currentImages = Array.from(sliderDiv.querySelectorAll('.slider-img')).map(img => img.src);
   currentIndex = 0;
   showModalImage();
-  modal.style.display = 'block';
+  modal.style.display = 'flex';
 }
 
 function showModalImage() {
@@ -200,5 +200,57 @@ document.addEventListener('DOMContentLoaded', () => {
     slider.addEventListener('click', () => {
       openModal(slider);
     });
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const dropdown = document.querySelector('.whatsapp-dropdown');
+  if (!dropdown) return;
+
+  dropdown.addEventListener('click', e => {
+    // Alternar desplegable (toggle) al clic
+    const content = dropdown.querySelector('.whatsapp-dropdown-content');
+    if (!content) return;
+
+    if (content.style.display === 'block') {
+      content.style.display = 'none';
+      dropdown.setAttribute('aria-expanded', 'false');
+    } else {
+      content.style.display = 'block';
+      dropdown.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Opcional: cerrar el desplegable al hacer clic fuera
+  document.addEventListener('click', e => {
+    if (!dropdown.contains(e.target)) {
+      const content = dropdown.querySelector('.whatsapp-dropdown-content');
+      if (content) {
+        content.style.display = 'none';
+        dropdown.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('.whatsapp-float-btn');
+  const menu = document.querySelector('.whatsapp-float-dropdown-content');
+
+  btn.addEventListener('click', () => {
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      menu.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      menu.style.display = 'block';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Cerrar el menú si se hace click fuera
+  document.addEventListener('click', (event) => {
+    if (!btn.contains(event.target) && !menu.contains(event.target)) {
+      menu.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+    }
   });
 });
