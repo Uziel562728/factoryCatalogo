@@ -14,13 +14,28 @@ header a:hover {
   text-decoration: underline;
 }
 
-body {
+/*body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
   background: linear-gradient(to bottom, black 40%, #75736f 60%);
   color: black;
+}*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  /* Fondo estático */
+  background: linear-gradient(to bottom, black 40%, #75736f 60%);
+  background-attachment: fixed; /* Esto fija el fondo al viewport */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: black;
+  overflow-x: hidden;
 }
 
 
