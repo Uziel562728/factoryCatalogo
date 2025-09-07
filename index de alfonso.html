@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo de Telas</title>
+  <!-- CSS incrustado más abajo -->
+  <style>
+/* Reset y base */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+header a {
+  color: #edbb58;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+/*body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom, black 40%, #75736f 60%);
+  color: black;
+}*/
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+  /* Fondo estático */
+  background: linear-gradient(to bottom, black 40%, #75736f 60%);
+  background-attachment: fixed; /* Esto fija el fondo al viewport */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: black;
+  overflow-x: hidden;
+}
+
+
+/* Contenedor principal que crece */
+.container {
+  flex: 1 0 auto;
+  max-width: none;     /* CAMBIA 480px por none */
+  width: 100%;         /* AGREGA ESTA LÍNEA */
+  margin: 0 auto;
+  padding: 10px;       /* CAMBIA 20px por 10px */
+}
+
+/* Header */
+header {
+  text-align: center;
+  background: linear-gradient(45deg, #75736f, #2e2d2a);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+
+h1 {
+  font-size: 2rem;
+  color: #edbb58;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* Botón WhatsApp */
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(45deg, #25d366, #128c7e);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  margin-top: 15px;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Grid de las tarjetas */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Tarjetas */
+
+
+.fabric-card {
+  background: linear-gradient(135deg, rgba(117, 115, 111, 0.9), rgba(46, 45, 42, 0.8));
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  color: #f5f5f5;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* Uniformar tamaño */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 420px;  /* todas al mismo alto aprox */
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.9rem;
+}
+
+
+
+
+.fabric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Slider de imágenes */
+.fabric-slider {
+  position: relative;
+  width: 100%;
+  padding-top: 140%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.slider-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.slider-img.active {
+  opacity: 1;
+}
+
+.fabric-label {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+  z-index: 2;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+/* Texto de la tarjeta */
+.fabric-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #edbb58;
+  margin-bottom: 6px;
+}
+
+
+.fabric-description {
+  color: white;
+  margin: 8px 0 10px;
+  line-height: 1.45;
+  font-size: 0.9rem;
+  min-height: 84px;     /* 2-3 líneas de texto */
+  display: block;
+}
+
+
+.fabric-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+/* Botón consultar */
+.contact-btn {
+    display: block;           /* para que ocupe línea completa */
+    margin: 1rem auto 0 auto; /* arriba 1rem, auto horizontal para centrar */
+    background: linear-gradient(45deg, #75736f, black);
+    color: white;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 0.85rem;
+    max-width: 140px;         /* opcional para no hacerlo muy ancho */
+    text-align: center;
+}
+
+
+.contact-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Footer siempre abajo */
+footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  text-align: center;
+  padding: 30px 15px;
+  background: linear-gradient(45deg, #75736f, #2e2d2a);
+  color: #f0f0f0;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+footer p:last-child {
+  color: white;
+  font-size: 0.75rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 tarjetas por fila en celular */
+    gap: 10px;
+  }
+
+  .fabric-card {
+    max-width: 100%;
+  }
+
+  header {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Extra: para pantallas muy angostas (opcional) */
+@media (max-width: 360px) {
+  .catalog-grid {
+    grid-template-columns: 1fr; /* 1 tarjeta por fila si es muy angosta */
+  }
+}
+
+/* Divider */
+.divider {
+  border: none;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 25px 0;
+  border-radius: 2px;
+}
+
+/* Modal de imágenes */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.8);
+  user-select: none;
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 70vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+
+.modal-caption {
+  margin: 15px auto 30px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.modal .prev,
+.modal .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 12px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 2.5rem;
+  border-radius: 3px;
+  user-select: none;
+  background-color: rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+.modal .prev:hover,
+.modal .next:hover {
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal .prev {
+  left: 10px;
+}
+
+.modal .next {
+  right: 10px;
+}
+
+.modal .close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.modal .close:hover {
+  color: #ccc;
+}
+
+#imageModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+/* Carrusel */
+.carousel {
+    max-width: 800px;
+    width: 90%;
+    margin: 2rem auto;
+    position: relative;
+    width: auto;        /* ancho aumentado */
+    margin: 2rem auto 1rem auto; /* margen abajo reducido para separar del botón */
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    background: linear-gradient(135deg, #1a1a1a, #fff9c4);
+    display: flex;
+    flex-direction: column;  /* para poner imagen arriba y info abajo */
+}
+
+/* Imagen dentro del carrusel */
+.carousel img {
+    width: 100%;
+    height: auto;          /* altura automática para no tapar texto */
+    object-fit: cover;
+    display: none;
+    border-radius: 15px 15px 0 0; /* bordes solo arriba para separar de info */
+    transition: opacity 0.5s ease-in-out;
+    flex-shrink: 0;        /* evitar que la imagen se reduzca */
+}
+
+.carousel img.active {
+    display: block;
+}
+
+/* Contenedor para nombre, descripción y botón */
+.carousel .info {
+    background: #111;
+    padding: 15px 20px;
+    color: white;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    flex-grow: 1;           /* que ocupe el resto del espacio */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Nombre y descripción */
+.carousel .info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.carousel .info p {
+    margin: 0;
+    font-size: 1rem;
+    color: white;
+}
+
+/* Botón consultar debajo de la descripción */
+.carousel .contact-btn {
+    margin: 1px auto 0 auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    opacity: 0.95;
+    background: linear-gradient(45deg, black, #75736f);
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 60%;
+    text-align: center;
+    border: none;
+    color: white;
+}
+
+.carousel .contact-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7);
+}
+
+/* Flechas y indicadores mantienen estilos previos */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(76,175,80,0.8);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50%;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+}
+
+.arrow:hover {
+    background-color: #388e3c;
+}
+
+.arrow.left {
+    left: 5px;
+}
+
+.arrow.right {
+    right: 5px;
+}
+.section-title {
+  color: #5D4037; /* Cambia este color por el que quieras */
+}
+.carousel .product-info h3 {
+  color: #edbb58;       /* Color marrón oscuro que resalta con el fondo crema */
+  text-align: center;   /* Centrado horizontal */
+  font-size: 2rem;    /* Tamaño opcional */
+  margin: 0.5rem 0;
+}
+.carousel .product-info p {
+  color: white;       /* Otro tono marrón más suave que negro */
+  font-size: 1rem;
+  text-align: center;
+  margin: 0 1rem 0.8rem;
+  line-height: 1.4;
+}
+footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  text-align: center;
+  padding: 30px 15px;
+  background-color: rgba(0, 0, 0, 0.95); /* casi sólido */
+  color: #fff;
+  font-size: 0.85rem;
+  border-radius: 0;
+  width: 100%;
+}
+.search-container {
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+}
+
+#fabricSearch {
+  width: 80%;
+  max-width: 400px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  background-color: #fff9c4;  /* fondo amarillo claro */
+  color: #333;                /* texto oscuro para buen contraste */
+  transition: border-color 0.3s ease;
+}
+
+#fabricSearch:focus {
+  border-color: #4caf50; /* verde para que combine */
+  background-color: #fffec8; /* un amarillo un poco más claro al enfocar */
+}
+.whatsapp-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 50px; /* espacio para desplegable */
+  z-index: 10000; /* asegurar que quede arriba */
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #25D366;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.whatsapp-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  z-index: 100;
+  top: 100%;
+  left: 0;
+}
+
+.whatsapp-dropdown-content a {
+  color: #25D366;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  font-weight: normal;
+}
+
+.whatsapp-dropdown-content a:hover {
+  background-color: #e6f4ea;
+}
+
+/* Mostrar el desplegable al hover o focus para accesibilidad */
+.whatsapp-dropdown:hover .whatsapp-dropdown-content,
+.whatsapp-dropdown:focus-within .whatsapp-dropdown-content {
+  display: block;
+}
+
+.whatsapp-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+.whatsapp-float-dropdown {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  font-family: Arial, sans-serif;
+}
+
+.whatsapp-float-btn {
+  background-color: #25D366;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-float-btn:hover,
+.whatsapp-float-btn:focus {
+  background-color: #128C4A;
+  outline: none;
+}
+
+.whatsapp-icon {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+.whatsapp-float-dropdown-content {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 180px;
+  user-select: none;
+}
+
+.whatsapp-float-dropdown-content li a {
+  display: block;
+  padding: 12px 16px;
+  color: #25D366;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.whatsapp-float-dropdown-content li:last-child a {
+  border-bottom: none;
+}
+
+.whatsapp-float-dropdown-content li a:hover,
+.whatsapp-float-dropdown-content li a:focus {
+  background-color: #e6f4ea;
+  outline: none;
+}
+/* AGREGAR AL FINAL DEL ARCHIVO */
+@media (max-width: 480px) {
+  .container {
+    padding: 5px;
+    max-width: none;
+    width: 100%;
+  }
+  
+  .catalog-grid {
+    gap: 8px;
+  }
+  
+  .fabric-card {
+    width: 100%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>• Factory •</h1>
+      <p class="subtitle">Descubre el Verano 2026.</p>
+      <p>Lino Sastrero | Morley Suede | Wafle | Lino Rayado | CEY</p>
+      <p style="margin-top: 5px;">
+        Encontranos en: 
+        <a href="https://maps.google.com/?cid=8707056725779467481&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank">
+          Bacacay 3013
+        </a>
+      </p>
+      <!-- Botón WhatsApp con desplegable de números -->
+      <div class="whatsapp-dropdown" tabindex="0" aria-haspopup="true" aria-expanded="false">
+        <div class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.149-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.173.198-.297.298-.495.099-.198.05-.371-.025-.52-.075-.149-.67-1.611-.916-2.203-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.075-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.26.489 1.69.625.71.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347z"/>
+          </svg>
+          Contactar por WhatsApp
+        </div>
+        <div class="whatsapp-dropdown-content" role="menu">
+          <a href="https://wa.me/5491166182006" target="_blank" rel="noopener noreferrer" role="menuitem">+54 9 11 6618-2006</a>
+          <a href="https://wa.me/5491157498970" target="_blank" rel="noopener noreferrer" role="menuitem">+54 9 11 5749-8970</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Carrusel personalizado -->
+    <section class="carousel">
+      <!-- Imágenes del carrusel -->
+      <img src="https://i.ibb.co/vKF1pWp/Imagen-de-Whats-App-2025-07-31-a-las-16-19-13-89971266.jpg" alt="Morley Suede" />
+      <img src="https://i.ibb.co/4w6cq18g/Imagen-de-Whats-App-2025-07-31-a-las-16-16-09-bbcf0581.jpg" alt="Wafle" />
+      <img src="https://i.ibb.co/nM37rwG0/Imagen-de-Whats-App-2025-08-18-a-las-19-04-44-83d12cb4.jpg" alt="Barbie Sastrero" />
+      <img src="https://i.ibb.co/5xkCN3W5/Imagen-de-Whats-App-2025-08-18-a-las-14-49-51-cdd62794.jpg" alt="Rústico" />
+      <img src="https://i.ibb.co/dJsW5BRz/Imagen-de-Whats-App-2025-08-18-a-las-14-55-04-2cf3b956.jpg" alt="Morley KLM" />
+      <img src="https://i.ibb.co/B5zHDNZ2/Imagen-de-Whats-App-2025-08-18-a-las-14-55-05-0b0eeeeb.jpg" alt="Viscosa Airflow" />
+      <img src="https://i.ibb.co/FkLfY9hq/Imagen-de-Whats-App-2025-08-18-a-las-14-56-35-c675c03e.jpg" alt="Lino Cuadrille" />
+      <img src="https://i.ibb.co/2YYxq16w/Imagen-de-Whats-App-2025-08-18-a-las-14-59-05-ece8b75a.jpg" alt="Cuerina" />
+      <img src="https://i.ibb.co/xtX6tZxp/Imagen-de-Whats-App-2025-08-18-a-las-15-08-12-702450fc.jpg" alt="Lino Jaspeado" />
+      <img src="https://i.ibb.co/cXyT1nbf/Imagen-de-Whats-App-2025-08-18-a-las-15-08-55-4c04f603.jpg" alt="Twil Lolis" />
+
+      <!-- Indicadores para cada imagen (10 en total) -->
+      <div class="indicators" style="text-align:center; margin-top: 10px;">
+        <span class="indicator active" onclick="currentSlide(1)"></span>
+        <span class="indicator" onclick="currentSlide(2)"></span>
+        <span class="indicator" onclick="currentSlide(3)"></span>
+        <span class="indicator" onclick="currentSlide(4)"></span>
+        <span class="indicator" onclick="currentSlide(5)"></span>
+        <span class="indicator" onclick="currentSlide(6)"></span>
+        <span class="indicator" onclick="currentSlide(7)"></span>
+        <span class="indicator" onclick="currentSlide(8)"></span>
+        <span class="indicator" onclick="currentSlide(9)"></span>
+        <span class="indicator" onclick="currentSlide(10)"></span>
+      </div>
+
+      <!-- Flechas para navegación -->
+      <button class="arrow left" onclick="prevSlide()">&#10094;</button>
+      <button class="arrow right" onclick="nextSlide()">&#10095;</button>
+
+      <!-- Contenedor con info y botón -->
+      <div class="info product-info">
+        <h3 id="product-name">Lino Sastrero</h3>
+        <p id="product-description">
+          Elegante y fresco, el lino sastrero combina la naturalidad del lino con la estructura ideal para prendas formales de verano. Ideal para trajes livianos, blazers y pantalones con caída impecable.
+        </p>
+        <button class="contact-btn" onclick="enviarConsultaConNombre('Lino Sastrero')">Consultar</button>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <div class="search-container">
+      <input type="text" id="fabricSearch" placeholder="Buscar telas..." />
+    </div>
+    
+    <!-- Grid de tarjetas con las telas nuevas sin precios -->
+    <section class="catalog-grid">
+
+      <div class="whatsapp-float-dropdown">
+        <button class="whatsapp-float-btn" aria-haspopup="true" aria-expanded="false" aria-controls="whatsappOptions" id="whatsappBtn">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" width="24" height="24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.67.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.173.198-.297.298-.495.099-.198.05-.371-.025-.52-.075-.149-.67-1.612-.916-2.204-.242-.579-.487-.5-.67-.51-.173-.007-.371-.009-.57-.009s-.52.074-.792.371c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path>
+          </svg>
+        </button>
+        <ul class="whatsapp-float-dropdown-content" id="whatsappOptions" role="menu" aria-labelledby="whatsappBtn">
+          <li role="none">
+            <a href="https://wa.me/5491166182006" target="_blank" role="menuitem" rel="noopener noreferrer">+54 9 11 6618-2006</a>
+          </li>
+          <li role="none">
+            <a href="https://wa.me/5491157498970" target="_blank" role="menuitem" rel="noopener noreferrer">+54 9 11 5749-8970</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Lino Sastrero -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/DH77cjcV/Imagen-de-Whats-App-2025-08-28-a-las-16-33-12-5004c258.jpg" alt="Lino Sastrero 4" class="slider-img active" />
+          <img src="https://i.ibb.co/WvM7s4LG/file-0000000006d461fd8ba167a71358d1e9.png" alt="Lino Sastrero 2" class="slider-img" />
+          <img src="https://i.ibb.co/prjy8ng5/file-0000000014f8622f88ede3c198f240fc.png" alt="Lino Sastrero 3" class="slider-img" />
+        </div>
+        <h4 class="fabric-name">Lino Sastrero</h4>
+        <p class="fabric-description">Tela elegante y fresca que combina la naturalidad del lino con estructura sastrera. Ideal para trajes livianos, blazers y pantalones con caída impecable.</p>
+        <button class="contact-btn" data-name="Lino Sastrero">Consultar</button>
+      </article>
+
+      <!-- Morley Suede -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/vKF1pWp/Imagen-de-Whats-App-2025-07-31-a-las-16-19-13-89971266.jpg" alt="Morley Suede" class="slider-img active" />
+          <img src="https://i.ibb.co/fGFqNq0g/file-00000000202c61f592b7ac1443c9cd08.png" alt="Morley Suede adicional" class="slider-img" />
+        </div>
+        <h4 class="fabric-name">Morley Suede</h4>
+        <p class="fabric-description">Tejido acanalado con acabado gamuzado. Suave y elástico, perfecto para prendas modernas y sofisticadas con gran comodidad.</p>
+        <button class="contact-btn" data-name="Morley Suede">Consultar</button>
+      </article>
+
+      <!-- Wafle -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/4w6cq18g/Imagen-de-Whats-App-2025-07-31-a-las-16-16-09-bbcf0581.jpg" alt="Wafle" class="slider-img active" />
+          <img src="https://i.ibb.co/HD5MMxW6/Imagen-de-Whats-App-2025-07-31-a-las-17-09-55-a8748f67.jpg" alt="Wafle 2" class="slider-img" />
+          <img src="https://i.ibb.co/SX1xrYZx/Imagen-de-Whats-App-2025-08-28-a-las-16-33-14-ce23071d.jpg" alt="Wafle 3" class="slider-img" />
+        </div>
+        <h4 class="fabric-name">Wafle</h4>
+        <p class="fabric-description">Textura tipo cuadrillé, suave y confortable. Ideal para buzos, joggers y looks casuales con estilo relajado.</p>
+        <button class="contact-btn" data-name="Wafle">Consultar</button>
+      </article>
+
+      <!-- Lino Rayado -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/MyDJXZhm/Imagen-de-Whats-App-2025-07-31-a-las-16-16-56-7421441d.jpg" alt="Lino Rayado" class="slider-img active" />
+          <img src="https://i.ibb.co/5WJMVBnV/Imagen-de-Whats-App-2025-07-31-a-las-17-42-30-30329274.jpg" alt="Lino Rayado 2" class="slider-img" />
+          <img src="https://i.ibb.co/bgGmGCb7/Imagen-de-Whats-App-2025-08-18-a-las-14-55-57-f62387a8.jpg" alt="Lino Rayado 3" class="slider-img" />
+          <img src="https://i.ibb.co/QvZqg47W/Imagen-de-Whats-App-2025-08-28-a-las-16-33-15-3c95919d.jpg" alt="Lino Rayado 4" class="slider-img" />
+        </div>
+        <h4 class="fabric-name">Lino Rayado</h4>
+        <p class="fabric-description">Lino liviano con diseño a rayas. Perfecto para camisas y vestidos frescos de aire clásico y natural.</p>
+        <button class="contact-btn" data-name="Lino Rayado">Consultar</button>
+      </article>
+
+      <!-- Cey -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/xK0Pj39m/Imagen-de-Whats-App-2025-07-31-a-las-16-20-12-c5a560a7.jpg" alt="Cey" class="slider-img active" />
+          <img src="https://i.ibb.co/dJsBBjDw/Imagen-de-Whats-App-2025-07-31-a-las-17-32-46-1891940f.jpg" alt="Cey 2" class="slider-img" />
+        </div>
+        <h4 class="fabric-name">Cey</h4>
+        <p class="fabric-description">Tejido ligero y suave, ideal para prendas veraniegas y looks casuales. Brinda frescura y confort todo el día.</p>
+        <button class="contact-btn" data-name="Cey">Consultar</button>
+      </article>
+      
+      <!-- Barbie Sastrero -->
+      <div id="barbie-sastrero" class="fabric-card">
+        <div class="fabric-slider">
+          <img class="slider-img active" src="https://i.ibb.co/DfhDPmJc/Imagen-de-Whats-App-2025-08-18-a-las-14-47-50-fa6e8edf.jpg" alt="Barbie Sastrero 1">
+          <img class="slider-img" src="https://i.ibb.co/nM37rwG0/Imagen-de-Whats-App-2025-08-18-a-las-19-04-44-83d12cb4.jpg" alt="Barbie Sastrero 2">
+        </div>
+        <h4 class="fabric-name">Barbie Sastrero</h4>
+        <p class="fabric-description">Tela con cuerpo y caída elegante para sastrería moderna. Aporta estructura a sacos, faldas y pantalones.</p>
+        <button class="contact-btn" data-name="Barbie Sastrero">Consultar</button>
+      </div>
+
+      <!-- Rústico -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/5xkCN3W5/Imagen-de-Whats-App-2025-08-18-a-las-14-49-51-cdd62794.jpg" alt="Rústico" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Rustico</h4>
+        <p class="fabric-description">Tejido resistente con textura marcada. Suma un estilo natural y descontracturado a prendas informales.</p>
+        <button class="contact-btn" data-name="Rústico">Consultar</button>
+      </div>
+
+      <!-- Morley KLM -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/dJsW5BRz/Imagen-de-Whats-App-2025-08-18-a-las-14-55-04-2cf3b956.jpg" alt="Morley KLM" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Morley KLM</h4>
+        <p class="fabric-description">Acanalado elástico, suave al tacto. Ideal para remeras y vestidos cómodos con un acabado refinado.</p>
+        <button class="contact-btn" data-name="Morley KLM">Consultar</button>
+      </div>
+
+      <!-- Viscosa Airflow -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/B5zHDNZ2/Imagen-de-Whats-App-2025-08-18-a-las-14-55-05-0b0eeeeb.jpg" alt="Viscosa Airflow" class="slider-img active" />
+          <img src="https://i.ibb.co/tTYTqF6R/Imagen-de-Whats-App-2025-08-28-a-las-16-33-14-24eda4cd.jpg" alt="Viscosa Airflow 2" class="slider-img" />
+          <img src="https://i.ibb.co/r21F9MqK/Imagen-de-Whats-App-2025-08-28-a-las-16-33-14-6f210277.jpg" alt="Viscosa Airflow 3" class="slider-img" />
+        </div>
+        <h4 class="fabric-name">Viscosa Airflow</h4>
+        <p class="fabric-description">Tela fluida y ligera con gran respirabilidad. Perfecta para blusas, vestidos y camisas de verano.</p>
+        <button class="contact-btn" data-name="Viscosa Airflow">Consultar</button>
+      </div>
+
+      <!-- Lino Cuadrille -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/FkLfY9hq/Imagen-de-Whats-App-2025-08-18-a-las-14-56-35-c675c03e.jpg" alt="Lino Cuadrille" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Lino Cuadrille</h4>
+        <p class="fabric-description">Lino con cuadros, fresco y sofisticado. Aporta un estilo clásico a prendas de temporada.</p>
+        <button class="contact-btn" data-name="Lino Cuadrille">Consultar</button>
+      </div>
+
+      <!-- Cuerina -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/2YYxq16w/Imagen-de-Whats-App-2025-08-18-a-las-14-59-05-ece8b75a.jpg" alt="Cuerina" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Cuerina</h4>
+        <p class="fabric-description">Material sintético suave y resistente. Ideal para chaquetas, accesorios y moda urbana con presencia.</p>
+        <button class="contact-btn" data-name="Cuerina">Consultar</button>
+      </div>
+
+      <!-- Lino Jaspeado -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/xtX6tZxp/Imagen-de-Whats-App-2025-08-18-a-las-15-08-12-702450fc.jpg" alt="Lino Jaspeado" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Lino Jaspeado</h4>
+        <p class="fabric-description">Lino con jaspe sutil e irregular. Aporta textura y distinción a prendas frescas y livianas.</p>
+        <button class="contact-btn" data-name="Lino Jaspeado">Consultar</button>
+      </div>
+
+      <!-- Twil Lolis -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/cXyT1nbf/Imagen-de-Whats-App-2025-08-18-a-las-15-08-55-4c04f603.jpg" alt="Twil Lolis" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Twil Lolis</h4>
+        <p class="fabric-description">Twill suave y liviano con caída elegante. Perfecto para blusas, vestidos y prendas confortables.</p>
+        <button class="contact-btn" data-name="Twil Lolis">Consultar</button>
+      </div>
+
+      <!-- Lumi Stripes -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/7x0TmbWG/Imagen-de-Whats-App-2025-08-28-a-las-16-33-11-80184ef6.jpg" alt="Lumi Stripes 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Lumi Stripes</h4>
+        <p class="fabric-description">Tela ligera con rayas delicadas que aportan frescura y elegancia a looks casuales y modernos.</p>
+        <button class="contact-btn" data-name="Lumi Stripes">Consultar</button>
+      </div>
+
+      <!-- Rayel -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/4ZwwyPS3/Imagen-de-Whats-App-2025-08-28-a-las-16-33-12-01ab11a2.jpg" alt="Rayel 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Rayel</h4>
+        <p class="fabric-description">Tela rayada de estilo clásico. Ideal para camisas y vestidos atemporales y frescos.</p>
+        <button class="contact-btn" data-name="Rayel">Consultar</button>
+      </div>
+
+      <!-- Cloud Stripe -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/Ndz1z7x9/Imagen-de-Whats-App-2025-08-28-a-las-16-33-12-c548e37b.jpg" alt="Cloud Stripe 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Cloud Stripe</h4>
+        <p class="fabric-description">Tejido suave con rayas sutiles. Perfecto para prendas livianas y delicadas de media estación.</p>
+        <button class="contact-btn" data-name="Cloud Stripe">Consultar</button>
+      </div>
+
+      <!-- Dobby Glow -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/bMC2ZC9h/Imagen-de-Whats-App-2025-08-28-a-las-16-33-13-a47dcf9f.jpg" alt="Dobby Glow 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Dobby Glow</h4>
+        <p class="fabric-description">Textura especial con brillo leve. Aporta un toque sofisticado a prendas y detalles destacados.</p>
+        <button class="contact-btn" data-name="Dobby Glow">Consultar</button>
+      </div>
+
+      <!-- Cey con Glitter -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/fGtZXxZL/Imagen-de-Whats-App-2025-08-28-a-las-16-33-13-6c1736be.jpg" alt="Cey con Glitter 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Cey con Glitter</h4>
+        <p class="fabric-description">Tejido ligero con destellos. Ideal para blusas, vestidos y acentos festivos sin excesos.</p>
+        <button class="contact-btn" data-name="Cey con Glitter">Consultar</button>
+      </div>
+
+      <!-- Cey Bordado -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/qHk66YY/Imagen-de-Whats-App-2025-08-28-a-las-16-33-13-050558c0.jpg" alt="Cey Bordado 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Cey Bordado</h4>
+        <p class="fabric-description">Bordados finos sobre base liviana. Aporta un detalle artesanal y elegante a cualquier prenda.</p>
+        <button class="contact-btn" data-name="Cey Bordado">Consultar</button>
+      </div>
+
+      <!-- Baby Cotton -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/93n6pgWn/Imagen-de-Whats-App-2025-08-28-a-las-16-33-15-93842699.jpg" alt="Baby Cotton 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Baby Cotton</h4>
+        <p class="fabric-description">Algodón extra suave y delicado. Perfecto para ropa de bebé y pieles sensibles.</p>
+        <button class="contact-btn" data-name="Baby Cotton">Consultar</button>
+      </div>
+
+      <!-- Lino Rayón con Lycra -->
+      <div class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/YMkXymj/Imagen-de-Whats-App-2025-08-28-a-las-16-33-16-54583030.jpg" alt="Lino Rayón con Lycra 1" class="slider-img active">
+        </div>
+        <h4 class="fabric-name">Lino Rayón con Lycra</h4>
+        <p class="fabric-description">Mezcla fresca y elástica con buena caída y ajuste. Ideal para siluetas modernas y cómodas.</p>
+        <button class="contact-btn" data-name="Lino Rayón con Lycra">Consultar</button>
+      </div>
+
+      <!-- Red -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/b5WVhgpg/Imagen-de-Whats-App-2025-08-28-a-las-16-33-16-25d101bb.jpg" alt="Red" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Red</h4>
+        <p class="fabric-description">Tejido liviano de tono intenso con caída natural. Perfecto para prendas de verano con presencia.</p>
+        <button class="contact-btn" data-name="Red">Consultar</button>
+      </article>
+
+      <!-- Bambula Vintage -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/yFj3KzBK/Imagen-de-Whats-App-2025-08-28-a-las-16-33-16-c419bec8.jpg" alt="Bambula Vintage" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Bambula Vintage</h4>
+        <p class="fabric-description">Tela ligera de textura arrugada y espíritu retro. Ideal para blusas y vestidos casuales.</p>
+        <button class="contact-btn" data-name="Bambula Vintage">Consultar</button>
+      </article>
+
+      <!-- Silk Airflow -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/Kp2wSsv4/Imagen-de-Whats-App-2025-08-28-a-las-16-33-17-6197e125.jpg" alt="Silk Airflow" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Silk Airflow</h4>
+        <p class="fabric-description">Seda fluida y liviana con gran movimiento. Perfecta para prendas elegantes y aéreas.</p>
+        <button class="contact-btn" data-name="Silk Airflow">Consultar</button>
+      </article>
+
+      <!-- Poplin con lycra -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/ychgn0Tk/Imagen-de-Whats-App-2025-08-28-a-las-16-33-17-f407f0b3.jpg" alt="Poplin con lycra" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Poplin con lycra</h4>
+        <p class="fabric-description">Popelina con elasticidad: confort y ajuste en camisas, pantalones y sastrería liviana.</p>
+        <button class="contact-btn" data-name="Poplin con lycra">Consultar</button>
+      </article>
+
+      <!-- Waffle Rayado -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/JjJxcLfw/Imagen-de-Whats-App-2025-08-28-a-las-16-33-17-19e68885.jpg" alt="Waffle Rayado" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Waffle Rayado</h4>
+        <p class="fabric-description">Waffle con rayas, suave y confortable. Ideal para buzos y joggers con estilo casual.</p>
+        <button class="contact-btn" data-name="Waffle Rayado">Consultar</button>
+      </article>
+
+      <!-- Morley Rayado -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/k24qDfs3/Imagen-de-Whats-App-2025-08-28-a-las-16-33-17-dc5922a4.jpg" alt="Morley Rayado" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Morley Rayado</h4>
+        <p class="fabric-description">Acanalado elástico con rayas. Cómodo y moderno para prendas versátiles del día a día.</p>
+        <button class="contact-btn" data-name="Morley Rayado">Consultar</button>
+      </article>
+
+      <!-- Red Lurex -->
+      <article class="fabric-card">
+        <div class="fabric-slider">
+          <img src="https://i.ibb.co/sdFMK9nj/Imagen-de-Whats-App-2025-08-28-a-las-16-33-18-752530a4.jpg" alt="Red Lurex" class="slider-img active" />
+        </div>
+        <h4 class="fabric-name">Red Lurex</h4>
+        <p class="fabric-description">Tejido con hilos de lurex que añaden brillo sutil. Ideal para looks de noche y detalles chic.</p>
+        <button class="contact-btn" data-name="Red Lurex">Consultar</button>
+      </article>
+
+    </section>
+  </div>
+
+  <!-- Modal para ampliar imágenes -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage" />
+    <div class="modal-caption" id="modalCaption"></div>
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
+
+  <footer style="text-align: center; padding: 20px; background-color: #123844; font-size: 14px; color: #d0cfe8;">
+    <p>© 2025 Factory – Catálogo de Telas</p>
+    <p>Todos los derechos reservados | Calidad que se siente, estilo que perdura</p>
+    <p>Web creada por <strong>Uziel Romano</strong></p>
+    <a href="https://wa.me/541134223812" target="_blank" style="color: #d0cfe8; text-decoration: none;">
+      11 3422 3812
+    </a>
+  </footer>
+
+  <!-- JS incrustado más abajo -->
+  <script>
+// Animación de entrada de las tarjetas 
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.fabric-card');
+  cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    setTimeout(() => {
+      card.style.transition = 'all 0.6s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 200);
+  });
+
+  // Filtrar telas del catálogo según texto del buscador
+  const searchInput = document.getElementById('fabricSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+      const cards = document.querySelectorAll('.fabric-card');
+
+      cards.forEach(card => {
+        const name = card.querySelector('.fabric-name').textContent.toLowerCase();
+        const description = card.querySelector('.fabric-description').textContent.toLowerCase();
+
+        if (name.includes(filter) || description.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Slider automático para cada .fabric-slider
+  const sliders = document.querySelectorAll('.fabric-slider');
+  sliders.forEach(slider => {
+    const images = slider.querySelectorAll('.slider-img');
+    if (images.length <= 1) return; // Si solo hay 1 imagen, no animar
+    let current = 0;
+
+    setInterval(() => {
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    }, 3000);
+  });
+
+  // --- NUEVO: Código para el carrusel personalizado ---
+  // Productos para el carrusel con su info
+ const productos = [
+  {
+    nombre: "Morley Suede",
+    descripcion: "Tela con textura acanalada tipo morley y acabado tipo gamuza. Suave, elástica y elegante, ideal para prendas modernas, cómodas y con un toque sofisticado."
+  },
+  {
+    nombre: "Wafle",
+    descripcion: "Tela con textura acanalada en forma de cuadrícula, suave y confortable al tacto. Perfecta para prendas casuales, buzos, joggers y looks relajados con estilo."
+  },
+   { 
+  nombre: "Barbie Sastrero",
+  descripcion: "Tela con cuerpo y caída elegante, ideal para sastrería moderna y prendas estructuradas con un acabado sofisticado."
+},
+{ 
+  nombre: "Rústico",
+  descripcion: "Tela resistente y con textura marcada, ideal para prendas informales, cómodas y con estilo natural."
+},
+{ 
+  nombre: "Morley KLM",
+  descripcion: "Tela suave con textura tipo morley y acabado elegante, ideal para prendas modernas, cómodas y con caída impecable."
+},
+{ 
+  nombre: "Viscosa Airflow",
+  descripcion: "Tela ligera y fluida, ideal para prendas frescas y cómodas. Perfecta para vestidos, blusas y camisas con caída natural y elegante."
+},
+{ 
+  nombre: "Lino Cuadrille",
+  descripcion: "Lino con diseño cuadriculado, fresco y elegante, ideal para prendas de verano con estilo clásico y sofisticado."
+},
+{ 
+  nombre: "Cuerina",
+  descripcion: "Cuerina suave y resistente, ideal para confeccionar chaquetas, accesorios y detalles de moda con estilo urbano y moderno."
+},
+{ 
+  nombre: "Lino Jaspeado",
+  descripcion: "Lino jaspeado con textura ligera y sofisticada, perfecto para camisas, vestidos y pantalones frescos de estilo elegante y natural."
+},
+{ 
+  nombre: "Twil Lolis",
+  descripcion: "Twil suave y ligero con caída elegante, ideal para blusas, vestidos y prendas cómodas con un toque sofisticado."
+},
+
+];
+
+
+  // Variables para el carrusel
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.carousel img');
+  const indicators = document.querySelectorAll('.indicator');
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+
+    if (index >= totalSlides) currentSlideIndex = 0;
+    else if (index < 0) currentSlideIndex = totalSlides - 1;
+    else currentSlideIndex = index;
+
+    slides[currentSlideIndex].classList.add('active');
+    indicators[currentSlideIndex].classList.add('active');
+
+    // Actualizar texto y botón del producto
+    const nameEl = document.getElementById('product-name');
+    const descEl = document.getElementById('product-description');
+    const btn = document.querySelector('.product-info .contact-btn');
+
+    if (nameEl && descEl && btn) {
+      nameEl.textContent = productos[currentSlideIndex].nombre;
+      descEl.textContent = productos[currentSlideIndex].descripcion;
+
+      // Actualizar onclick del botón para enviar consulta con nombre correcto
+      btn.onclick = () => enviarConsultaConNombre(productos[currentSlideIndex].nombre);
+    }
+  }
+
+  function nextSlide() {
+    showSlide(currentSlideIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentSlideIndex - 1);
+  }
+
+  function currentSlide(index) {
+    showSlide(index - 1);
+  }
+
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
+  window.currentSlide = currentSlide;
+
+  function startCarousel() {
+    setInterval(nextSlide, 4000);
+  }
+
+  // Función para abrir WhatsApp con mensaje personalizado (nuevo)
+  function enviarConsultaConNombre(nombreTela) {
+    const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
+    const numero = "5491166182006";
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+  }
+
+  // Inicializar carrusel al cargar DOM
+  if (slides.length > 0) {
+    showSlide(0);
+    startCarousel();
+  }
+  // --- FIN NUEVO ---
+});
+
+// WhatsApp consulta con mensaje personalizado
+function enviarConsulta(element) {
+  const nombreTela = element.getAttribute('data-name') || 'tela';
+  const mensaje = `Hola, buenas, ¿cómo va? Vi su página y quería consultar por esta tela: ${nombreTela}`;
+  const numero = "5491166182006";
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
+}
+
+// Modal para mostrar imágenes en grande y navegar entre ellas
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImage');
+const modalCaption = document.getElementById('modalCaption');
+const closeBtn = modal.querySelector('.close');
+const prevBtn = modal.querySelector('.prev');
+const nextBtn = modal.querySelector('.next');
+
+let currentImages = [];
+let currentIndex = 0;
+
+function openModal(sliderDiv) {
+  currentImages = Array.from(sliderDiv.querySelectorAll('.slider-img')).map(img => img.src);
+  currentIndex = 0;
+  showModalImage();
+  modal.style.display = 'flex';
+}
+
+function showModalImage() {
+  modalImg.src = currentImages[currentIndex];
+  modalCaption.textContent = `Imagen ${currentIndex + 1} de ${currentImages.length}`;
+}
+
+closeBtn.onclick = () => {
+  modal.style.display = 'none';
+};
+
+prevBtn.onclick = () => {
+  currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+  showModalImage();
+};
+
+nextBtn.onclick = () => {
+  currentIndex = (currentIndex + 1) % currentImages.length;
+  showModalImage();
+};
+
+// Cerrar modal al hacer click fuera de la imagen
+window.onclick = event => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+};
+
+// Añadir listeners a botones consultar (para que funcionen)
+document.addEventListener('DOMContentLoaded', () => {
+  const consultButtons = document.querySelectorAll('.contact-btn');
+  consultButtons.forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      enviarConsulta(btn);
+    });
+  });
+
+  // Añadir apertura modal al hacer click en la imagen del slider
+  const sliders = document.querySelectorAll('.fabric-slider');
+  sliders.forEach(slider => {
+    slider.style.cursor = 'pointer';
+    slider.addEventListener('click', () => {
+      openModal(slider);
+    });
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const dropdown = document.querySelector('.whatsapp-dropdown');
+  if (!dropdown) return;
+
+  dropdown.addEventListener('click', e => {
+    // Alternar desplegable (toggle) al clic
+    const content = dropdown.querySelector('.whatsapp-dropdown-content');
+    if (!content) return;
+
+    if (content.style.display === 'block') {
+      content.style.display = 'none';
+      dropdown.setAttribute('aria-expanded', 'false');
+    } else {
+      content.style.display = 'block';
+      dropdown.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Opcional: cerrar el desplegable al hacer clic fuera
+  document.addEventListener('click', e => {
+    if (!dropdown.contains(e.target)) {
+      const content = dropdown.querySelector('.whatsapp-dropdown-content');
+      if (content) {
+        content.style.display = 'none';
+        dropdown.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('.whatsapp-float-btn');
+  const menu = document.querySelector('.whatsapp-float-dropdown-content');
+
+  btn.addEventListener('click', () => {
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      menu.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      menu.style.display = 'block';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Cerrar el menú si se hace click fuera
+  document.addEventListener('click', (event) => {
+    if (!btn.contains(event.target) && !menu.contains(event.target)) {
+      menu.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+
+  </script>
+</body>
+</html>
